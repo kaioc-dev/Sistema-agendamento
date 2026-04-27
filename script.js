@@ -1,61 +1,61 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('appointment-form');
-    const list = document.getElementById('appointments-list');
+    const form = document.getElementById('schedule-form');
+    const listContainer = document.getElementById('appointments-list');
 
-    // Carregar agendamentos do LocalStorage
-    let appointments = JSON.parse(localStorage.getItem('cyberAppointments')) || [];
+    // Carregar do LocalStorage
+    let appointments = JSON.parse(localStorage.getItem('pureSchedule_data')) || [];
 
-    function renderAppointments() {
-        list.innerHTML = '';
-        appointments.forEach((app, index) => {
+    const render = () => {
+        if (appointments.length === 0) {
+            listContainer.innerHTML = '<p class="empty-msg">Nenhum agendamento pendente.</p>';
+            return;
+        }
+
+        listContainer.innerHTML = '';
+        appointments.forEach((item, index) => {
             const div = document.createElement('div');
             div.className = 'appointment-item';
-            
-            // Criar link do WhatsApp
-            const message = `Olá, sou ${app.name}. Gostaria de confirmar meu agendamento de ${app.service} no dia ${app.date} às ${app.time}.`;
-            const waLink = `https://wa.me/5500000000000?text=${encodeURIComponent(message)}`;
+
+            const whatsappMsg = `Olá, sou ${item.client}. Gostaria de confirmar meu agendamento de ${item.service} para o dia ${item.date} às ${item.time}.`;
+            const waLink = `https://wa.me/5500000000000?text=${encodeURIComponent(whatsappMsg)}`;
 
             div.innerHTML = `
-                <div>
-                    <strong>${app.client}</strong> - ${app.service}<br>
-                    <small><i class="far fa-clock"></i> ${app.date} às ${app.time}</small>
+                <div class="info">
+                    <h4>${item.client}</h4>
+                    <p>${item.service} • <strong>${item.date} às ${item.time}</strong></p>
                 </div>
-                <div>
-                    <a href="${waLink}" target="_blank" class="btn-whatsapp" title="Confirmar via WhatsApp">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                    <button onclick="deleteApp(${index})" style="background:none; border:none; color:#ff4444; margin-left:15px; cursor:pointer;">
-                        <i class="fas fa-trash"></i>
-                    </button>
+                <div class="actions">
+                    <a href="${waLink}" target="_blank" title="Confirmar WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <button onclick="removeItem(${index})" title="Excluir"><i class="fas fa-trash-alt"></i></button>
                 </div>
             `;
-            list.appendChild(div);
+            listContainer.appendChild(div);
         });
-    }
+    };
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const newApp = {
+        const newAppointment = {
             service: document.getElementById('service').value,
             date: document.getElementById('date').value,
             time: document.getElementById('time').value,
             client: document.getElementById('client-name').value
         };
 
-        appointments.push(newApp);
-        localStorage.setItem('cyberAppointments', JSON.stringify(appointments));
-        
+        appointments.push(newAppointment);
+        localStorage.setItem('pureSchedule_data', JSON.stringify(appointments));
         form.reset();
-        renderAppointments();
-        alert('Agendamento registrado com sucesso no sistema!');
+        render();
     });
 
-    window.deleteApp = (index) => {
-        appointments.splice(index, 1);
-        localStorage.setItem('cyberAppointments', JSON.stringify(appointments));
-        renderAppointments();
+    window.removeItem = (index) => {
+        if (confirm('Deseja remover este agendamento?')) {
+            appointments.splice(index, 1);
+            localStorage.setItem('pureSchedule_data', JSON.stringify(appointments));
+            render();
+        }
     };
 
-    renderAppointments();
+    render();
 });
