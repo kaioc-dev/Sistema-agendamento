@@ -1,146 +1,193 @@
 :root {
-    --bg-color: #0d0d0d;
-    --card-bg: rgba(255, 255, 255, 0.05);
-    --neon-blue: #00f3ff;
-    --neon-pink: #ff00ff;
-    --text-color: #e0e0e0;
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --bg-body: #f8fafc;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --success: #22c55e;
+    --danger: #ef4444;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Roboto, sans-serif;
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    overflow-x: hidden;
-    background-image: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #0d0d0d 100%);
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    line-height: 1.5;
 }
 
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
+.app-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
 }
 
-header {
+.main-header {
     text-align: center;
     margin-bottom: 40px;
 }
 
-.neon-text {
-    font-size: 3rem;
-    color: #fff;
-    text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px var(--neon-blue), 0 0 42px var(--neon-blue);
-    letter-spacing: 5px;
+.main-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-main);
 }
 
-.neon-text span {
-    color: var(--neon-pink);
-    text-shadow: 0 0 7px #fff, 0 0 21px var(--neon-pink);
+.main-header h1 span {
+    color: var(--primary);
 }
 
-.glass-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    padding: 30px;
-    margin-bottom: 30px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+.main-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
 }
 
-.section-title {
-    color: var(--neon-blue);
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-    border-left: 4px solid var(--neon-pink);
-    padding-left: 15px;
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 30px;
 }
 
-.input-group {
-    margin-bottom: 20px;
+@media (max-width: 768px) {
+    .grid-layout {
+        grid-template-columns: 1fr;
+    }
 }
 
-.input-row {
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+}
+
+.card-header {
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+}
+
+.card-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
     display: flex;
-    gap: 20px;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
 }
 
 label {
     display: block;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-    color: var(--neon-blue);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--text-main);
 }
 
 input, select {
     width: 100%;
-    padding: 12px;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid var(--neon-blue);
-    border-radius: 5px;
-    color: white;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, select:focus {
     outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-input:focus {
-    border-color: var(--neon-pink);
-    box-shadow: 0 0 10px var(--neon-pink);
-}
-
-/* Botão Neon Estilizado */
-.btn-neon {
-    position: relative;
-    display: inline-block;
-    padding: 15px 30px;
-    color: var(--neon-blue);
-    background: transparent;
-    border: none;
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    transition: 0.5s;
-    letter-spacing: 4px;
-    cursor: pointer;
+.btn-primary {
     width: 100%;
-    overflow: hidden;
+    padding: 12px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
 }
 
-.btn-neon:hover {
-    background: var(--neon-blue);
-    color: #050801;
-    box-shadow: 0 0 5px var(--neon-blue), 0 0 25px var(--neon-blue), 0 0 50px var(--neon-blue);
+.btn-primary:hover {
+    background-color: var(--primary-hover);
 }
 
-/* Estilo da Lista de Agendamentos */
+.list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 .appointment-item {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px border-left solid var(--neon-pink);
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    animation: fadeIn 0.5s ease;
+    background-color: #fff;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+.info h4 {
+    font-size: 1rem;
+    margin-bottom: 4px;
 }
 
-.btn-whatsapp {
-    color: #25d366;
-    text-decoration: none;
-    font-size: 1.2rem;
+.info p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
 }
 
-footer {
+.actions {
+    display: flex;
+    gap: 12px;
+}
+
+.actions a {
+    color: var(--success);
+    font-size: 1.25rem;
+}
+
+.actions button {
+    background: none;
+    border: none;
+    color: var(--danger);
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.empty-msg {
     text-align: center;
-    margin-top: 40px;
-    opacity: 0.6;
+    color: var(--text-muted);
+    padding: 40px 0;
+}
+
+.main-footer {
+    text-align: center;
+    margin-top: 60px;
+    padding: 20px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border);
 }
