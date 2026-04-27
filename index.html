@@ -3,66 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PureSchedule | Gestão de Agendamentos</title>
+    <title>The Barber | Agendamento Premium</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="app-container">
         <header class="main-header">
-            <h1>Pure<span>Schedule</span></h1>
-            <p>Gestão simplificada de atendimentos</p>
+            <h1>THE <span>BARBER</span></h1>
+            <p>Corte, Barba & Estilo Tradicional</p>
         </header>
 
         <div class="grid-layout">
             <section class="card">
                 <div class="card-header">
-                    <h2><i class="fas fa-plus-circle"></i> Novo Agendamento</h2>
+                    <h2><i class="fas fa-razor"></i> Reservar Cadeira</h2>
                 </div>
                 <form id="schedule-form">
                     <div class="form-group">
-                        <label for="service">Serviço</label>
+                        <label>Serviço Desejado</label>
                         <select id="service" required>
-                            <option value="" disabled selected>Escolha uma opção</option>
-                            <option value="Manutenção Preventiva">Manutenção Preventiva</option>
-                            <option value="Reparo de Hardware">Reparo de Hardware</option>
-                            <option value="Consultoria Técnica">Consultoria Técnica</option>
+                            <option value="" disabled selected>O que vamos fazer hoje?</option>
+                            <option value="Corte de Cabelo Clássico">Corte de Cabelo Clássico</option>
+                            <option value="Barba e Toalha Quente">Barba e Toalha Quente</option>
+                            <option value="Combo: Cabelo + Barba">Combo: Cabelo + Barba</option>
+                            <option value="Pigmentação / Camuflagem">Pigmentação / Camuflagem</option>
                         </select>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="date">Data</label>
+                            <label>Data</label>
                             <input type="date" id="date" required>
                         </div>
                         <div class="form-group">
-                            <label for="time">Horário</label>
+                            <label>Horário</label>
                             <input type="time" id="time" required>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="client-name">Nome do Cliente</label>
-                        <input type="text" id="client-name" placeholder="Ex: Kaio César" required>
+                        <label>Nome do Cavalheiro</label>
+                        <input type="text" id="client-name" placeholder="Seu nome completo" required>
                     </div>
 
-                    <button type="submit" class="btn-primary">Confirmar Agendamento</button>
+                    <button type="submit" class="btn-premium">RESERVAR AGORA</button>
                 </form>
             </section>
 
             <section class="card">
                 <div class="card-header">
-                    <h2><i class="fas fa-calendar-check"></i> Próximos Horários</h2>
+                    <h2><i class="fas fa-clock"></i> Agenda do Dia</h2>
                 </div>
                 <div id="appointments-list" class="list-container">
-                    <p class="empty-msg">Nenhum agendamento pendente.</p>
+                    <p class="empty-msg">Nenhum cliente agendado no momento.</p>
                 </div>
             </section>
         </div>
 
         <footer class="main-footer">
-            <p>&copy; 2026 | Desenvolvido por Kaio César</p>
+            <p>&copy; 2026 | Gestão por Kaio César</p>
         </footer>
     </div>
     <script src="script.js"></script>
