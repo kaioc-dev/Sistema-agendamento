@@ -1,0 +1,146 @@
+:root {
+    --bg-color: #0d0d0d;
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --neon-blue: #00f3ff;
+    --neon-pink: #ff00ff;
+    --text-color: #e0e0e0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+    background-image: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #0d0d0d 100%);
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.neon-text {
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 0 0 7px #fff, 0 0 10px #fff, 0 0 21px var(--neon-blue), 0 0 42px var(--neon-blue);
+    letter-spacing: 5px;
+}
+
+.neon-text span {
+    color: var(--neon-pink);
+    text-shadow: 0 0 7px #fff, 0 0 21px var(--neon-pink);
+}
+
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+}
+
+.section-title {
+    color: var(--neon-blue);
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    border-left: 4px solid var(--neon-pink);
+    padding-left: 15px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-row {
+    display: flex;
+    gap: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--neon-blue);
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--neon-blue);
+    border-radius: 5px;
+    color: white;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 10px var(--neon-pink);
+}
+
+/* Botão Neon Estilizado */
+.btn-neon {
+    position: relative;
+    display: inline-block;
+    padding: 15px 30px;
+    color: var(--neon-blue);
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    transition: 0.5s;
+    letter-spacing: 4px;
+    cursor: pointer;
+    width: 100%;
+    overflow: hidden;
+}
+
+.btn-neon:hover {
+    background: var(--neon-blue);
+    color: #050801;
+    box-shadow: 0 0 5px var(--neon-blue), 0 0 25px var(--neon-blue), 0 0 50px var(--neon-blue);
+}
+
+/* Estilo da Lista de Agendamentos */
+.appointment-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px border-left solid var(--neon-pink);
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.btn-whatsapp {
+    color: #25d366;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    opacity: 0.6;
+}
