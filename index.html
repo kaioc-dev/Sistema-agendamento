@@ -3,66 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberSchedule | Agendamento Pro</title>
+    <title>PureSchedule | Gestão de Agendamentos</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1 class="neon-text">CYBER<span>SCHEDULE</span></h1>
-            <p>Sistema de Gerenciamento de Serviços</p>
+    <div class="app-container">
+        <header class="main-header">
+            <h1>Pure<span>Schedule</span></h1>
+            <p>Gestão simplificada de atendimentos</p>
         </header>
 
-        <main>
-            <section class="glass-card" id="booking-section">
-                <h2 class="section-title"><i class="fas fa-calendar-plus"></i> Novo Agendamento</h2>
-                <form id="appointment-form">
-                    <div class="input-group">
-                        <label>Serviço</label>
+        <div class="grid-layout">
+            <section class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-plus-circle"></i> Novo Agendamento</h2>
+                </div>
+                <form id="schedule-form">
+                    <div class="form-group">
+                        <label for="service">Serviço</label>
                         <select id="service" required>
-                            <option value="" disabled selected>Selecione o serviço</option>
-                            <option value="Manutenção de Celular">Manutenção de Celular</option>
-                            <option value="Reparo de Software">Reparo de Software</option>
-                            <option value="Limpeza Técnica">Limpeza Técnica</option>
+                            <option value="" disabled selected>Escolha uma opção</option>
+                            <option value="Manutenção Preventiva">Manutenção Preventiva</option>
+                            <option value="Reparo de Hardware">Reparo de Hardware</option>
+                            <option value="Consultoria Técnica">Consultoria Técnica</option>
                         </select>
                     </div>
 
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label>Data</label>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Data</label>
                             <input type="date" id="date" required>
                         </div>
-                        <div class="input-group">
-                            <label>Horário</label>
+                        <div class="form-group">
+                            <label for="time">Horário</label>
                             <input type="time" id="time" required>
                         </div>
                     </div>
 
-                    <div class="input-group">
-                        <label>Seu Nome</label>
+                    <div class="form-group">
+                        <label for="client-name">Nome do Cliente</label>
                         <input type="text" id="client-name" placeholder="Ex: Kaio César" required>
                     </div>
 
-                    <button type="submit" class="btn-neon">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        CONFIRMAR AGENDAMENTO
-                    </button>
+                    <button type="submit" class="btn-primary">Confirmar Agendamento</button>
                 </form>
             </section>
 
-            <section class="glass-card" id="admin-section">
-                <h2 class="section-title"><i class="fas fa-list-ul"></i> Próximos Horários</h2>
+            <section class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-calendar-check"></i> Próximos Horários</h2>
+                </div>
                 <div id="appointments-list" class="list-container">
-                    </div>
+                    <p class="empty-msg">Nenhum agendamento pendente.</p>
+                </div>
             </section>
-        </main>
+        </div>
 
-        <footer>
-            <p>&copy; 2026 Desenvolvido por Kaio César</p>
+        <footer class="main-footer">
+            <p>&copy; 2026 | Desenvolvido por Kaio César</p>
         </footer>
     </div>
     <script src="script.js"></script>
