@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let appointments = JSON.parse(localStorage.getItem('barber_appointments')) || [];
 
+    // FUNÇÃO: Converte "HH:MM" em minutos totais para facilitar o cálculo
+    const timeToMinutes = (time) => {
+        const [hours, minutes] = time.split(':').map(Number);
+        return (hours * 60) + minutes;
+    };
+
     const render = () => {
         if (appointments.length === 0) {
             listContainer.innerHTML = '<p class="empty-msg">Nenhum cliente agendado no momento.</p>';
@@ -14,12 +20,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         listContainer.innerHTML = '';
+        
+        // BÔNUS: Ordena os agendamentos por data e horário (do mais cedo pro mais tarde)
+        appointments.sort((a, b) => {
+            if (a.date !== b.date) return a.date.localeCompare(b.date);
+            return timeToMinutes(a.time) - timeToMinutes(b.time);
+        });
+
         appointments.forEach((item, index) => {
             const div = document.createElement('div');
             div.className = 'appointment-item';
 
-            // Link para o Barbeiro chamar o cliente no WhatsApp, se precisar
-            const cleanPhone = item.whatsapp.replace(/\D/g, ''); // Remove traços e parênteses
+            // Link para o Barbeiro chamar o cliente no WhatsApp
+            const cleanPhone = item.whatsapp.replace(/\D/g, ''); 
             const whatsappMsg = `Olá ${item.client}, aqui é da barbearia! Confirmando seu agendamento de ${item.service} no dia ${item.date} às ${item.time}.`;
             const waLinkClient = `https://wa.me/55${cleanPhone}?text=${encodeURIComponent(whatsappMsg)}`;
 
@@ -53,7 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const doc = new jsPDF();
         const item = appointments[index];
 
-        // Layout do PDF
         doc.setFont("helvetica", "bold");
         doc.setFontSize(22);
         doc.text("THE BARBER", 105, 20, null, null, "center");
@@ -74,17 +86,37 @@ document.addEventListener('DOMContentLoaded', () => {
         doc.setFontSize(10);
         doc.text("Apresente este comprovante no momento do atendimento.", 105, 110, null, null, "center");
 
-        // Baixa o arquivo com o nome do cliente
         doc.save(`Comprovante_${item.client.replace(/\s+/g, '_')}.pdf`);
     };
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         
+        const selectedDate = document.getElementById('date').value;
+        const selectedTime = document.getElementById('time').value;
+        const newTimeInMinutes = timeToMinutes(selectedTime);
+
+        // VALIDAÇÃO: Bloqueia horários com menos de 40 minutos de diferença
+        const conflito = appointments.find(app => {
+            if (app.date === selectedDate) {
+                const existingTimeInMinutes = timeToMinutes(app.time);
+                // A função Math.abs transforma números negativos em positivos para medir a diferença exata
+                const diff = Math.abs(newTimeInMinutes - existingTimeInMinutes);
+                return diff < 40;
+            }
+            return false;
+        });
+
+        // Se houver conflito, emite alerta e PARA a execução
+        if (conflito) {
+            alert(`Horário indisponível! Já existe um agendamento às ${conflito.time} nesta data. Por favor, escolha um horário com pelo menos 40 minutos de diferença.`);
+            return; 
+        }
+        
         const newApp = {
             service: document.getElementById('service').value,
-            date: document.getElementById('date').value,
-            time: document.getElementById('time').value,
+            date: selectedDate,
+            time: selectedTime,
             client: document.getElementById('client-name').value,
             whatsapp: document.getElementById('client-whatsapp').value
         };
@@ -94,11 +126,9 @@ document.addEventListener('DOMContentLoaded', () => {
         form.reset();
         render();
 
-        // FUNÇÃO: Enviar Notificação Direta para o WhatsApp do Barbeiro
         const adminMsg = `*NOVO AGENDAMENTO!* ✂️\n\n*Cliente:* ${newApp.client}\n*Contato:* ${newApp.whatsapp}\n*Serviço:* ${newApp.service}\n*Data:* ${newApp.date}\n*Horário:* ${newApp.time}\n\n_Agendamento gerado via The Barber System_`;
         const adminLink = `https://wa.me/${telefoneBarbeiro}?text=${encodeURIComponent(adminMsg)}`;
         
-        // Abre uma nova aba com a mensagem pronta para enviar ao barbeiro
         window.open(adminLink, '_blank');
     });
 
