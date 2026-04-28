@@ -183,3 +183,22 @@ input:focus, select:focus {
     padding-top: 30px;
     color: var(--text-muted);
 }
+/* Atualize essa parte no final do seu CSS */
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaçamento padrão entre os botões */
+}
+.actions a { color: #25d366; font-size: 1.4rem; text-decoration: none; }
+.actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: 0.2s;
+}
+.btn-pdf { color: var(--gold); }
+.btn-pdf:hover { transform: scale(1.1); }
+.btn-del { color: #ff4444; }
+.btn-del:hover { transform: scale(1.1); }
+
