@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const listContainer = document.getElementById('appointments-list');
 
     // Número de WhatsApp da Barbearia (Admin) - Troque para o número real
-    const telefoneBarbeiro = "5500000000000"; 
+    const telefoneBarbeiro = "5581921426179"; 
 
     let appointments = JSON.parse(localStorage.getItem('barber_appointments')) || [];
 
